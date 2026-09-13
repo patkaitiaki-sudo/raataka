@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kai Oranga - Academic Research & Assessment Report</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    textarea {
+      min-height: 95px;
+      overflow-y: hidden;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+    
+    .report-only { display: none; }
+
+    /* University Grade Report Print & PDF Styling */
+    @media print {
+      .no-print { display: none !important; }
+      .tab-content { display: none !important; }
+      .report-only { display: block !important; }
+      
+      body { 
+        background-color: #ffffff !important; 
+        color: #111827 !important; 
+        font-family: Georgia, Cambria, "Times New Roman", Times, serif !important;
+        font-size: 11pt;
+        line-height: 1.6;
+      }
+      
+      @page {
+        size: A4;
+        margin: 22mm 18mm 22mm 18mm;
+        @top-right {
+          content: "Kai Oranga Assessment Report | Te Mahi Maara";
+          font-size: 8.5pt;
+          font-family: sans-serif;
+          color: #4b5563;
+        }
+        @bottom-right {
+          content: "Page " counter(page);
+          font-size: 8.5pt;
+          font-family: sans-serif;
+          color: #4b5563;
+        }
+      }
+
+      .report-page {
+        page-break-after: always;
+        break-after: page;
+      }
+
+      .report-photo {
+        width: 100% !important;
+        max-height: 280px !important;
+        object-fit: cover !important;
+        border-radius: 6px !important;
+        border: 1px solid #cbd5e1 !important;
+        margin-top: 6px;
+        margin-bottom: 6px;
+        page-break-inside: avoid !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-stone-100 text-stone-900 font-sans pb-24 antialiased">
+
+  <!-- Sticky Top Nav Bar -->
+  <header class="bg-emerald-950 text-stone-100 py-3.5 px-4 shadow-md sticky top-0 z-50 no-print">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2.5">
+        <span class="text-2xl">🌿</span>
+        <div>
+          <h1 class="text-lg font-bold tracking-tight">Kai Oranga Assessment Portal</h1>
+          <p class="text-xs text-emerald-300">Te Wānanga o Awanuiārangi — Level 3 Evidence Report</p>
+        </div>
+      </div>
+      
+      <!-- Tab Buttons -->
+      <nav class="flex items-center gap-1 bg-emerald-900/90 p-1.5 rounded-2xl border border-emerald-800 text-xs overflow-x-auto max-w-full">
+        <button type="button" onclick="switchTab(1)" id="tab-btn-1" class="tab-btn px-3 py-1.5 rounded-xl font-bold bg-emerald-700 text-white shadow transition whitespace-nowrap">
+          1. Cover & Context
+        </button>
+        <button type="button" onclick="switchTab(2)" id="tab-btn-2" class="tab-btn px-3 py-1.5 rounded-xl font-medium text-emerald-200 hover:text-white transition whitespace-nowrap">
+          2. I Mua (Before)
+        </button>
+        <button type="button" onclick="switchTab(3)" id="tab-btn-3" class="tab-btn px-3 py-1.5 rounded-xl font-medium text-emerald-200 hover:text-white transition whitespace-nowrap">
+          3. I te Mahi (During)
+        </button>
+        <button type="button" onclick="switchTab(4)" id="tab-btn-4" class="tab-btn px-3 py-1.5 rounded-xl font-medium text-emerald-200 hover:text-white transition whitespace-nowrap">
+          4. Whakaoti (After)
+        </button>
+        <button type="button" onclick="switchTab(5)" id="tab-btn-5" class="tab-btn px-3 py-1.5 rounded-xl font-medium text-emerald-200 hover:text-white transition whitespace-nowrap">
+          5. Huawhenua (Harvest)
+        </button>
+        <button type="button" onclick="switchTab(6)" id="tab-btn-6" class="tab-btn px-3 py-1.5 rounded-xl font-medium text-emerald-200 hover:text-white transition whitespace-nowrap">
+          6. Kai Prepared
+        </button>
+        <button type="button" onclick="switchTab(7)" id="tab-btn-7" class="tab-btn px-3 py-1.5 rounded-xl font-medium text-emerald-200 hover:text-white transition whitespace-nowrap">
+          7. Synthesis & PDF
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Auto-Save Floating Badge -->
+  <div id="saveBadge" class="fixed bottom-4 left-4 bg-stone-900/90 text-emerald-400 text-xs font-semibold px-3.5 py-1.5 rounded-full shadow border border-emerald-700 hidden no-print z-50 flex items-center gap-1.5">
+    <span>✓</span> <span>Auto-saved to device</span>
+  </div>
+
+  <main class="max-w-6xl mx-auto px-4 mt-7">
+    <form id="maaraJournalForm" onsubmit="handleDownloadPDF(event)">
+
+      <!-- ================================================================= -->
+      <!-- TAB 1: FORMAL ACADEMIC COVER PAGE & CONTEXT                       -->
+      <!-- ================================================================= -->
+      <div id="tab-content-1" class="tab-content print-page-break space-y-6">
+        
+        <div class="bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-stone-300 text-center space-y-6 relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-3 bg-emerald-900"></div>
+          <div class="pt-4 space-y-2">
+            <h4 class="text-xs font-bold uppercase tracking-widest text-emerald-800">Te Wānanga o Awanuiārangi</h4>
+            <h2 class="text-2xl md:text-3xl font-serif font-bold text-stone-900">Certificate in Kai Oranga (Kaupae Tuatoru)</h2>
+            <p class="text-sm font-medium text-stone-600">Te Mahi Maara Academic Assessment Report</p>
+          </div>
+
+          <div class="max-w-xl mx-auto py-6 border-y border-stone-200 grid grid-cols-1 md:grid-cols-2 gap-4 text-left text-sm">
+            <div>
+              <span class="block text-xs font-bold uppercase text-stone-500">Kaitiaki (Student):</span>
+              <input type="text" id="studentName" placeholder="Patria Danielle Lakshman" class="w-full font-medium text-stone-900 border-b border-stone-300 py-1 bg-transparent outline-none" oninput="triggerAutoSave()" />
+            </div>
+            <div>
+              <span class="block text-xs font-bold uppercase text-stone-500">Wāhi (Location / Site):</span>
+              <input type="text" id="maaraLocation" placeholder="Toia Community Teaching Garden" class="w-full font-medium text-stone-900 border-b border-stone-300 py-1 bg-transparent outline-none" oninput="triggerAutoSave()" />
+            </div>
+            <div>
+              <span class="block text-xs font-bold uppercase text-stone-500">Rā (Date of Mahi):</span>
+              <input type="date" id="mahiDate" class="w-full font-medium text-stone-900 border-b border-stone-300 py-1 bg-transparent outline-none" onchange="onDateChanged(this.value);" />
+            </div>
+            <div>
+              <span class="block text-xs font-bold uppercase text-stone-500">Ngā Hoa Mahi (Helpers):</span>
+              <input type="text" id="helpers" placeholder="Whānau / Tamariki" class="w-full font-medium text-stone-900 border-b border-stone-300 py-1 bg-transparent outline-none" oninput="triggerAutoSave()" />
+            </div>
+          </div>
+          <p class="text-xs italic text-stone-500">Submitted in partial fulfillment of practical assessment requirements for Kai Oranga.</p>
+        </div>
+
+        <section class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 space-y-4">
+          <h3 class="text-base font-serif font-bold text-emerald-950 border-b pb-2 flex items-center gap-2">
+            <span>🌙</span> Te Maramataka (Lunar Alignment & Strategic Plan)
+          </h3>
+          
+          <div class="bg-emerald-50/70 p-4 rounded-xl border border-emerald-200 grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+            <div>
+              <span id="lunarPhaseName" class="font-bold text-emerald-950 text-base block">Loading phase...</span>
+              <span id="lunarEnergy" class="inline-block mt-1 text-xs bg-emerald-200 text-emerald-900 font-bold px-2 py-0.5 rounded">--</span>
+            </div>
+            <div class="md:col-span-2 text-xs text-stone-800 leading-relaxed">
+              <strong>Traditional Guidance:</strong> <span id="lunarActivity">Calculating...</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label class="block text-xs font-bold uppercase tracking-wider text-stone-700">Mahere Maara (Strategic Rationale)</label>
+              <button type="button" onclick="startDictation('maramatakaPlan')" class="text-xs text-emerald-800 hover:text-emerald-950 font-semibold no-print">🎙️ Dictate</button>
+            </div>
+            <textarea rows="3" id="maramatakaPlan" oninput="autoExpand(this); triggerAutoSave();" placeholder="Articulate why today's operations align with lunar sap flow..." class="w-full p-3 border border-stone-300 rounded-xl text-sm font-serif leading-relaxed"></textarea>
+          </div>
+        </section>
+
+        <!-- Karakia Section -->
+        <section class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 space-y-4">
+          <div class="flex flex-col md:flex-row md:items-center justify-between border-b pb-2 gap-2">
+            <h3 class="text-base font-serif font-bold text-emerald-950 flex items-center gap-2">
+              <span>🌿</span> Karakia Tuwhera & Te Ao Wairua (10 Atua Options)
+            </h3>
+            <div class="flex items-center gap-2 no-print">
+              <label for="karakiaSelect" class="text-xs font-semibold text-stone-600">Select Preset:</label>
+              <select id="karakiaSelect" class="text-xs p-1.5 border rounded-lg bg-stone-50 font-medium" onchange="applyKarakiaPreset(this.value)">
+                <option value="">-- Choose from 10 Karakia --</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-stone-700 mb-1">Karakia Title</label>
+              <input type="text" id="karakiaTitle" placeholder="Nau Mai e Ngā Hua" class="w-full px-3.5 py-2.5 border rounded-xl text-sm font-semibold" oninput="triggerAutoSave()" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-stone-700 mb-1">Atua / Scenario</label>
+              <input type="text" id="karakiaScenario" placeholder="Atua connection" class="w-full px-3.5 py-2.5 border rounded-xl bg-stone-100 text-stone-600 text-sm" readonly />
+            </div>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label class="block text-xs font-bold uppercase text-stone-700">Te Reo Māori Recitation</label>
+              <button type="button" onclick="startDictation('karakiaActual')" class="text-xs text-emerald-800 font-semibold no-print">🎙️ Dictate</button>
+            </div>
+            <textarea rows="3" id="karakiaActual" oninput="autoExpand(this); triggerAutoSave();" placeholder="Nau mai e ngā hua..." class="w-full p-3 border rounded-xl font-serif italic text-sm text-emerald-950 leading-relaxed"></textarea>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-sky-800 mb-1">📖 Whakamāoritanga (Literal)</label>
+              <textarea rows="3" id="karakiaLiteral" oninput="autoExpand(this); triggerAutoSave();" placeholder="Literal translation..." class="w-full p-3 border rounded-xl text-xs font-serif leading-relaxed"></textarea>
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-amber-800 mb-1">✨ Whakamāramatanga (Metaphoric)</label>
+              <textarea rows="3" id="karakiaMetaphoric" oninput="autoExpand(this); triggerAutoSave();" placeholder="Cosmological symbolism..." class="w-full p-3 border rounded-xl text-xs font-serif leading-relaxed"></textarea>
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-purple-800 mb-1">💡 Toku Whakaaro (Interpretation)</label>
+              <textarea rows="3" id="karakiaInterpretation" oninput="autoExpand(this); triggerAutoSave();" placeholder="Personal reflection..." class="w-full p-3 border rounded-xl text-xs font-serif leading-relaxed"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- Whakataukī Section -->
+        <section class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 space-y-4">
+          <div class="flex flex-col md:flex-row md:items-center justify-between border-b pb-2 gap-2">
+            <h3 class="text-base font-serif font-bold text-emerald-950 flex items-center gap-2">
+              <span>🗣️</span> Whakataukī me ngā Kīwaha (10 Options)
+            </h3>
+            <select id="whakataukiSelect" class="text-xs p-1.5 border rounded-lg bg-stone-50 no-print" onchange="applyWhakataukiPreset(this.value)">
+              <option value="">-- Choose from 10 Whakataukī --</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-stone-700 mb-1">Whakataukī</label>
+              <input type="text" id="whakataukiText" placeholder="He kai kei aku ringa" class="w-full px-3.5 py-2.5 border rounded-xl text-sm font-semibold" oninput="triggerAutoSave()" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-stone-700 mb-1">Context</label>
+              <input type="text" id="whakataukiScenario" placeholder="Context" class="w-full px-3.5 py-2.5 border rounded-xl bg-stone-100 text-sm" readonly />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-sky-800 mb-1">Literal</label>
+              <textarea rows="2" id="whakataukiLiteral" oninput="autoExpand(this); triggerAutoSave();" placeholder="Literal..." class="w-full p-3 border rounded-xl text-xs font-serif"></textarea>
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-amber-800 mb-1">Metaphoric</label>
+              <textarea rows="2" id="whakataukiMetaphoric" oninput="autoExpand(this); triggerAutoSave();" placeholder="Metaphoric..." class="w-full p-3 border rounded-xl text-xs font-serif"></textarea>
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-purple-800 mb-1">Interpretation</label>
+              <textarea rows="2" id="whakataukiInterpretation" oninput="autoExpand(this); triggerAutoSave();" placeholder="Interpretation..." class="w-full p-3 border rounded-xl text-xs font-serif"></textarea>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-stone-200">
+            <div>
+              <label class="block text-xs font-bold uppercase text-stone-700 mb-1">Ture Tangata (Safety & Conduct)</label>
+              <textarea rows="2" id="tureTangata" oninput="autoExpand(this); triggerAutoSave();" placeholder="Whānau safety and collective care..." class="w-full p-3 border rounded-xl text-xs font-serif"></textarea>
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-stone-700 mb-1">Ture Tikanga (Tapu & Noa Boundaries)</label>
+              <textarea rows="2" id="tureTikanga" oninput="autoExpand(this); triggerAutoSave();" placeholder="Respecting seed tapu..." class="w-full p-3 border rounded-xl text-xs font-serif"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <div class="flex justify-end pt-2 no-print">
+          <button type="button" onclick="switchTab(2)" class="bg-emerald-800 hover:bg-emerald-900 text-white font-bold px-7 py-3 rounded-xl shadow transition text-sm flex items-center gap-2 cursor-pointer">
+            <span>Proceed to Tab 2: I Mua (Before)</span>
+            <span>→</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- TABS 2, 3, 4: STAGES                                              -->
+      <!-- ================================================================= -->
+      <div id="tab-content-2" class="tab-content print-page-break hidden space-y-6">
+        <div class="bg-gradient-to-r from-amber-900 to-stone-900 text-white p-5 rounded-2xl shadow-sm">
+          <div class="flex items-center justify-between"><span class="text-xs font-bold uppercase tracking-widest text-amber-300">Tab 2 of 7</span><button type="button" onclick="switchTab(1)" class="text-xs text-stone-300 underline cursor-pointer">← Back</button></div>
+          <h2 class="text-xl font-bold mt-0.5">1. I Mua (Before Mahi) Evidence</h2>
+        </div>
+        <section class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200">
+          <div class="flex items-center justify-between border-b pb-3 mb-4">
+            <h3 class="font-serif font-bold text-stone-900 text-base">Before Task Groups</h3>
+            <button type="button" onclick="addSubStage('before')" class="no-print text-xs font-bold text-amber-900 bg-amber-100 hover:bg-amber-200 px-3.5 py-2 rounded-xl cursor-pointer">➕ Add Task Group</button>
+          </div>
+          <div id="container-before" class="space-y-4"></div>
+        </section>
+        <div class="flex justify-between pt-2 no-print"><button type="button" onclick="switchTab(1)" class="bg-stone-200 px-5 py-2.5 rounded-xl text-xs cursor-pointer">← Back</button><button type="button" onclick="switchTab(3)" class="bg-emerald-800 text-white font-bold px-7 py-3 rounded-xl text-sm cursor-pointer">Next: During →</button></div>
+      </div>
+
+      <div id="tab-content-3" class="tab-content print-page-break hidden space-y-6">
+        <div class="bg-gradient-to-r from-emerald-900 to-teal-950 text-white p-5 rounded-2xl shadow-sm">
+          <div class="flex items-center justify-between"><span class="text-xs font-bold uppercase tracking-widest text-emerald-300">Tab 3 of 7</span><button type="button" onclick="switchTab(2)" class="text-xs text-stone-300 underline cursor-pointer">← Back</button></div>
+          <h2 class="text-xl font-bold mt-0.5">2. I te Mahi (During Mahi) Evidence</h2>
+        </div>
+        <section class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200">
+          <div class="flex items-center justify-between border-b pb-3 mb-4">
+            <h3 class="font-serif font-bold text-stone-900 text-base">During Task Groups</h3>
+            <button type="button" onclick="addSubStage('during')" class="no-print text-xs font-bold text-emerald-900 bg-emerald-100 hover:bg-emerald-200 px-3.5 py-2 rounded-xl cursor-pointer">➕ Add Task Group</button>
+          </div>
+          <div id="container-during" class="space-y-4"></div>
+        </section>
+        <div class="flex justify-between pt-2 no-print"><button type="button" onclick="switchTab(2)" class="bg-stone-200 px-5 py-2.5 rounded-xl text-xs cursor-pointer">← Back</button><button type="button" onclick="switchTab(4)" class="bg-emerald-800 text-white font-bold px-7 py-3 rounded-xl text-sm cursor-pointer">Next: After →</button></div>
+      </div>
+
+      <div id="tab-content-4" class="tab-content print-page-break hidden space-y-6">
+        <div class="bg-gradient-to-r from-stone-900 to-emerald-950 text-white p-5 rounded-2xl shadow-sm">
+          <div class="flex items-center justify-between"><span class="text-xs font-bold uppercase tracking-widest text-amber-300">Tab 4 of 7</span><button type="button" onclick="switchTab(3)" class="text-xs text-stone-300 underline cursor-pointer">← Back</button></div>
+          <h2 class="text-xl font-bold mt-0.5">3. Whakaoti (After Mahi) Evidence</h2>
+        </div>
+        <section class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200">
+          <div class="flex items-center justify-between border-b pb-3 mb-4">
+            <h3 class="font-serif font-bold text-stone-900 text-base">After Task Groups</h3>
+            <button type="button" onclick="addSubStage('after')" class="no-print text-xs font-bold text-stone-900 bg-stone-200 hover:bg-stone-300 px-3.5 py-2 rounded-xl cursor-pointer">➕ Add Task Group</button>
+          </div>
+          <div id="container-after" class="space-y-4"></div>
+        </section>
+        <div class="flex justify-between pt-2 no-print"><button type="button" onclick="switchTab(3)" class="bg-stone-200 px-5 py-2.5 rounded-xl text-xs cursor-pointer">← Back</button><button type="button" onclick="switchTab(5)" class="bg-emerald-800 text-white font-bold px-7 py-3 rounded-xl text-sm cursor-pointer">Next: Harvest →</button></div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- TAB 5: HUAWHENUA (HARVEST)                                        -->
+      <!-- ================================================================= -->
+      <div id="tab-content-5" class="tab-content print-page-break hidden space-y-6">
+        <div class="bg-gradient-to-r from-amber-900 via-stone-900 to-emerald-950 text-white p-5 rounded-2xl shadow-sm">
+          <div class="flex items-center justify-between"><span class="text-xs font-bold uppercase tracking-widest text-amber-300">Tab 5 of 7</span><button type="button" onclick="switchTab(4)" class="text-xs text-stone-300 underline cursor-pointer">← Back</button></div>
+          <h2 class="text-xl font-bold mt-0.5">🌾 Huawhenua (Fresh Harvest & Koha)</h2>
+        </div>
+        <section class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 academic-card space-y-4">
+          <h3 class="font-serif font-bold text-emerald-950 text-base border-b pb-2">Harvest Yield & Crop Details</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div><label class="block text-xs font-bold uppercase text-stone-700 mb-1">Crops Harvested</label><input type="text" id="harvestCrops" placeholder="Kūmara, Taewa..." class="w-full px-3.5 py-2.5 border rounded-xl text-sm" oninput="triggerAutoSave()" /></div>
+            <div><label class="block text-xs font-bold uppercase text-stone-700 mb-1">Harvest Amount / Weight</label><input type="text" id="harvestYield" placeholder="10kg" class="w-full px-3.5 py-2.5 border rounded-xl text-sm" oninput="triggerAutoSave()" /></div>
+          </div>
+          <div><label class="block text-xs font-bold uppercase text-stone-700 mb-1">Quality & Seed Saving Notes</label><textarea rows="3" id="harvestNotes" oninput="autoExpand(this); triggerAutoSave();" placeholder="Vigor, flavor..." class="w-full p-3 border rounded-xl text-sm font-serif"></textarea></div>
+        </section>
+        <section class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 academic-card space-y-4">
+          <h3 class="font-serif font-bold text-emerald-950 text-base border-b pb-2">🎁 Toha Huawhenua (Koha Sharing)</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div><label class="block text-xs font-bold uppercase text-stone-700 mb-1">Shared With</label><input type="text" id="harvestGivenTo" placeholder="Kaumātua, whānau..." class="w-full px-3.5 py-2.5 border rounded-xl text-sm" oninput="triggerAutoSave()" /></div>
+            <div><label class="block text-xs font-bold uppercase text-stone-700 mb-1">Amount Given</label><input type="text" id="harvestGivenAmount" placeholder="5kg box" class="w-full px-3.5 py-2.5 border rounded-xl text-sm" oninput="triggerAutoSave()" /></div>
+          </div>
+          <div><label class="block text-xs font-bold uppercase text-stone-700 mb-1">Blessings & Feedback</label><textarea rows="2" id="harvestGivenNotes" oninput="autoExpand(this); triggerAutoSave();" placeholder="Whānaungatanga..." class="w-full p-3 border rounded-xl text-sm font-serif"></textarea></div>
+        </section>
+        <section class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 academic-card">
+          <div class="flex items-center justify-between border-b pb-3 mb-4">
+            <h3 class="font-serif font-bold text-stone-900 text-base">Harvest Photo Evidence</h3>
+            <button type="button" onclick="addSubStage('harvest', 'Harvest - Kai Hauhake')" class="no-print text-xs font-bold text-amber-900 bg-amber-100 px-3.5 py-2 rounded-xl cursor-pointer">➕ Add Photo Group</button>
+          </div>
+          <div id="container-harvest" class="space-y-4"></div>
+        </section>
+        <div class="flex justify-between pt-2 no-print"><button type="button" onclick="switchTab(4)" class="bg-stone-200 px-5 py-2.5 rounded-xl text-xs cursor-pointer">← Back</button><button type="button" onclick="switchTab(6)" class="bg-emerald-800 text-white font-bold px-7 py-3 rounded-xl text-sm cursor-pointer">Next: Kai Created →</button></div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- TAB 6: KAI CREATED / COOKED                                       -->
+      <!-- ================================================================= -->
+      <div id="tab-content-6" class="tab-content print-page-break hidden space-y-6">
+        <div class="bg-gradient-to-r from-orange-950 to-stone-900 text-white p-5 rounded-2xl shadow-sm">
+          <div class="flex items-center justify-between"><span class="text-xs font-bold uppercase tracking-widest text-amber-300">Tab 6 of 7</span><button type="button" onclick="switchTab(5)" class="text-xs text-stone-300 underline cursor-pointer">← Back</button></div>
+          <h2 class="text-xl font-bold mt-0.5">🍲 Te Kai I Hangaia (Cooked & Prepared Kai)</h2>
+        </div>
+        <section class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 academic-card space-y-4">
+          <h3 class="font-serif font-bold text-amber-950 text-base border-b pb-2">Dish Details & Preparation</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div><label class="block text-xs font-bold uppercase text-stone-700 mb-1">Dish / Recipe Name</label><input type="text" id="kaiDishName" placeholder="Spinach & Taewa Bake" class="w-full px-3.5 py-2.5 border rounded-xl text-sm" oninput="triggerAutoSave()" /></div>
+            <div><label class="block text-xs font-bold uppercase text-stone-700 mb-1">Category</label><input type="text" id="kaiCategory" placeholder="Dinner, Rongoā tea" class="w-full px-3.5 py-2.5 border rounded-xl text-sm" oninput="triggerAutoSave()" /></div>
+          </div>
+          <div><label class="block text-xs font-bold uppercase text-stone-700 mb-1">Preparation Steps</label><textarea rows="3" id="kaiPreparationNotes" oninput="autoExpand(this); triggerAutoSave();" placeholder="Cooking steps..." class="w-full p-3 border rounded-xl text-sm font-serif"></textarea></div>
+        </section>
+        <section class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 academic-card space-y-4">
+          <h3 class="font-serif font-bold text-amber-950 text-base border-b pb-2">🤝 Sharing Prepared Kai</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div><label class="block text-xs font-bold uppercase text-stone-700 mb-1">Shared With</label><input type="text" id="kaiGivenTo" placeholder="Whānau table" class="w-full px-3.5 py-2.5 border rounded-xl text-sm" oninput="triggerAutoSave()" /></div>
+            <div><label class="block text-xs font-bold uppercase text-stone-700 mb-1">Portions Shared</label><input type="text" id="kaiGivenAmount" placeholder="Fed 5 people" class="w-full px-3.5 py-2.5 border rounded-xl text-sm" oninput="triggerAutoSave()" /></div>
+          </div>
+          <div><label class="block text-xs font-bold uppercase text-stone-700 mb-1">Whānau Reflections</label><textarea rows="2" id="kaiGivenNotes" oninput="autoExpand(this); triggerAutoSave();" placeholder="Reactions..." class="w-full p-3 border rounded-xl text-sm font-serif"></textarea></div>
+        </section>
+        <section class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 academic-card">
+          <div class="flex items-center justify-between border-b pb-3 mb-4">
+            <h3 class="font-serif font-bold text-stone-900 text-base">Kitchen & Food Photos</h3>
+            <button type="button" onclick="addSubStage('kaiCreated', 'Kai Created - Te Hanga Kai')" class="no-print text-xs font-bold text-amber-900 bg-amber-100 px-3.5 py-2 rounded-xl cursor-pointer">➕ Add Photo Group</button>
+          </div>
+          <div id="container-kaiCreated" class="space-y-4"></div>
+        </section>
+        <div class="flex justify-between pt-2 no-print"><button type="button" onclick="switchTab(5)" class="bg-stone-200 px-5 py-2.5 rounded-xl text-xs cursor-pointer">← Back</button><button type="button" onclick="switchTab(7)" class="bg-emerald-800 text-white font-bold px-7 py-3 rounded-xl text-sm cursor-pointer">Next: Export →</button></div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- TAB 7: SYNTHESIS, KAITIAKI & EXPORT                               -->
+      <!-- ================================================================= -->
+      <div id="tab-content-7" class="tab-content print-page-break hidden space-y-6">
+        <div class="bg-gradient-to-r from-emerald-950 via-stone-900 to-emerald-900 text-white p-5 rounded-2xl shadow-sm border border-emerald-800">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-widest text-emerald-300">Tab 7 of 7</span>
+            <button type="button" onclick="switchTab(6)" class="text-xs text-stone-300 hover:text-white underline no-print cursor-pointer">← Back to Tab 6</button>
+          </div>
+          <h2 class="text-xl font-bold mt-0.5">Synthesis, Kaitiaki Role & Academic PDF Export</h2>
+          <p class="text-xs text-stone-300 mt-1">
+            Reflect on your guardianship of the whenua, review next steps, and download your formal university assessment PDF.
+          </p>
+        </div>
+
+        <section class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 academic-card space-y-4">
+          <h3 class="text-base font-serif font-bold text-emerald-950 border-b pb-2 flex items-center gap-2">
+            <span>🌱</span> Whakaaro Whakamutunga & Your Role as Kaitiaki
+          </h3>
+
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label class="block text-xs font-bold uppercase tracking-wider text-emerald-900">Your Role & Reflections as Kaitiaki (Guardianship)</label>
+              <button type="button" onclick="startDictation('roleKaitiaki')" class="text-xs text-emerald-800 font-semibold no-print">🎙️ Dictate</button>
+            </div>
+            <textarea rows="4" id="roleKaitiaki" oninput="autoExpand(this); triggerAutoSave();" placeholder="Reflect on your responsibilities as a kaitiaki today..." class="w-full p-3 border rounded-xl bg-emerald-50/40 text-sm font-serif leading-relaxed"></textarea>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label class="block text-xs font-bold uppercase tracking-wider text-stone-700">Final Thoughts & Overall Learning</label>
+              <button type="button" onclick="startDictation('finalThoughts')" class="text-xs text-emerald-800 font-semibold no-print">🎙️ Dictate</button>
+            </div>
+            <textarea rows="4" id="finalThoughts" oninput="autoExpand(this); triggerAutoSave();" placeholder="Key insights..." class="w-full p-3 border rounded-xl text-sm font-serif leading-relaxed"></textarea>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label class="block text-xs font-bold uppercase tracking-wider text-stone-700">To-Do in Future / Next Lunar Phase</label>
+              <button type="button" onclick="startDictation('futureActions')" class="text-xs text-emerald-800 font-semibold no-print">🎙️ Dictate</button>
+            </div>
+            <textarea rows="3" id="futureActions" oninput="autoExpand(this); triggerAutoSave();" placeholder="Next steps..." class="w-full p-3 border rounded-xl text-sm font-serif leading-relaxed"></textarea>
+          </div>
+        </section>
+
+        <section class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200">
+          <div class="flex items-center justify-between border-b pb-2 mb-3">
+            <h3 class="text-base font-serif font-bold text-emerald-950 flex items-center gap-2">
+              <span>📝</span> Ngā Tuhinga Kē (Other Observations & Soil Biology)
+            </h3>
+            <button type="button" onclick="startDictation('otherNotes')" class="text-xs text-emerald-800 font-semibold no-print">🎙️ Dictate</button>
+          </div>
+          <textarea rows="3" id="otherNotes" oninput="autoExpand(this); triggerAutoSave();" placeholder="Worm counts, soil odor..." class="w-full p-3 border rounded-xl text-sm font-serif"></textarea>
+        </section>
+
+        <section class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200">
+          <div class="flex items-center justify-between border-b pb-2 mb-3.5">
+            <h3 class="text-base font-serif font-bold text-emerald-950 flex items-center gap-2">
+              <span>🔗</span> Rauemi me ngā Tohutoro (Resources & References)
+            </h3>
+            <button type="button" onclick="addResourceItem()" class="no-print text-xs font-bold text-emerald-800 bg-emerald-100 px-3 py-1.5 rounded-lg cursor-pointer">➕ Add Resource Link</button>
+          </div>
+          <div id="resourceContainer" class="space-y-3"></div>
+        </section>
+
+        <!-- Clean Export Hub -->
+        <section class="bg-emerald-50 border border-emerald-300 p-6 rounded-2xl shadow-sm no-print space-y-4">
+          <div>
+            <h3 class="text-base font-bold text-emerald-950">Academic Assessment Export Hub</h3>
+            <p class="text-xs text-emerald-800 mt-0.5 max-w-xl">
+              Click below to generate your fully formatted, university-ready assessment PDF report.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <button
+              type="submit"
+              class="inline-flex items-center gap-2 bg-emerald-900 hover:bg-emerald-950 text-white font-bold px-8 py-4 rounded-xl shadow-lg transition text-sm cursor-pointer"
+            >
+              <span>📄</span>
+              <span>Download Assessment PDF Report</span>
+            </button>
+          </div>
+        </section>
+
+        <div class="flex items-center justify-start pt-2 no-print">
+          <button type="button" onclick="switchTab(6)" class="bg-stone-200 px-5 py-2.5 rounded-xl text-xs cursor-pointer">← Back</button>
+        </div>
+      </div>
+
+
+      <!-- ================================================================= -->
+      <!-- HIDDEN REPORT-ONLY VIEW (CONVERTS FORM INTO ACADEMIC REPORT FOR PDF) -->
+      <!-- ================================================================= -->
+      <div id="reportPreviewContainer" class="report-only space-y-8">
+        
+        <!-- Report Page 1: Title & Foundations -->
+        <div class="report-page space-y-6">
+          <div class="text-center border-b-2 border-emerald-900 pb-6 space-y-2">
+            <h4 class="text-xs font-sans uppercase tracking-widest text-emerald-800 font-bold">Te Wānanga o Awanuiārangi</h4>
+            <h1 class="text-2xl font-serif font-bold text-stone-900">Certificate in Kai Oranga (Kaupae Tuatoru)</h1>
+            <h2 class="text-lg font-serif italic text-stone-700">Te Mahi Maara Practical Evidence Report</h2>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4 text-sm bg-stone-50 p-4 rounded-xl border border-stone-200">
+            <div><strong>Kaitiaki (Student):</strong> <span id="rep_studentName">--</span></div>
+            <div><strong>Wāhi (Location):</strong> <span id="rep_maaraLocation">--</span></div>
+            <div><strong>Rā (Date of Mahi):</strong> <span id="rep_mahiDate">--</span></div>
+            <div><strong>Ngā Hoa Mahi (Helpers):</strong> <span id="rep_helpers">--</span></div>
+          </div>
+
+          <div class="space-y-3" id="rep_sec_maramataka">
+            <h3 class="font-serif font-bold text-emerald-950 text-base border-b border-stone-300 pb-1">1. Te Maramataka & Strategic Plan</h3>
+            <p class="text-xs font-bold text-amber-800" id="rep_lunarHeader">--</p>
+            <p class="text-sm font-serif" id="rep_maramatakaPlan">--</p>
+          </div>
+
+          <div class="space-y-3" id="rep_sec_karakia">
+            <h3 class="font-serif font-bold text-emerald-950 text-base border-b border-stone-300 pb-1">2. Karakia Tuwhera</h3>
+            <p class="text-sm font-bold text-emerald-900" id="rep_karakiaTitle">--</p>
+            <p class="text-sm font-serif italic bg-emerald-50/50 p-3 rounded-lg border border-emerald-200" id="rep_karakiaActual">--</p>
+            <div class="grid grid-cols-3 gap-3 text-xs font-serif">
+              <div><strong>Literal:</strong> <p id="rep_karakiaLiteral">--</p></div>
+              <div><strong>Metaphoric:</strong> <p id="rep_karakiaMetaphoric">--</p></div>
+              <div><strong>Interpretation:</strong> <p id="rep_karakiaInterpretation">--</p></div>
+            </div>
+          </div>
+
+          <div class="space-y-3" id="rep_sec_whakatauki">
+            <h3 class="font-serif font-bold text-emerald-950 text-base border-b border-stone-300 pb-1">3. Whakataukī & Ngā Ture</h3>
+            <p class="text-sm font-bold text-emerald-900" id="rep_whakataukiText">--</p>
+            <div class="grid grid-cols-2 gap-4 text-xs font-serif">
+              <div><strong>Ture Tangata:</strong> <p id="rep_tureTangata">--</p></div>
+              <div><strong>Ture Tikanga:</strong> <p id="rep_tureTikanga">--</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Report Page 2+: Evidence Chapters (Before, During, After, Harvest, Kai) -->
+        <div id="rep_evidenceChapters" class="report-page space-y-6">
+          <h3 class="font-serif font-bold text-emerald-950 text-lg border-b-2 border-emerald-900 pb-1">4. Mahi Maara Evidence Chapters</h3>
+          <div id="rep_evidenceContent" class="space-y-6 text-sm font-serif">
+            <!-- Dynamically injected report evidence items -->
+          </div>
+        </div>
+
+        <!-- Report Final Page: Synthesis & Kaitiaki -->
+        <div class="report-page space-y-6" id="rep_sec_synthesis">
+          <h3 class="font-serif font-bold text-emerald-950 text-lg border-b-2 border-emerald-900 pb-1">5. Synthesis & Role as Kaitiaki</h3>
+          
+          <div class="space-y-2" id="rep_group_roleKaitiaki">
+            <h4 class="font-bold text-xs uppercase text-emerald-900">Role as Kaitiaki</h4>
+            <p class="text-sm font-serif leading-relaxed" id="rep_roleKaitiaki">--</p>
+          </div>
+
+          <div class="space-y-2" id="rep_group_finalThoughts">
+            <h4 class="font-bold text-xs uppercase text-stone-700">Final Thoughts & Learnings</h4>
+            <p class="text-sm font-serif leading-relaxed" id="rep_finalThoughts">--</p>
+          </div>
+
+          <div class="space-y-2" id="rep_group_futureActions">
+            <h4 class="font-bold text-xs uppercase text-stone-700">Future Actions & Next Lunar Phase</h4>
+            <p class="text-sm font-serif leading-relaxed" id="rep_futureActions">--</p>
+          </div>
+        </div>
+
+      </div>
+
+    </form>
+  </main>
+
+  <script>
+    let activeTabNumber = 1;
+
+    function switchTab(tabIndex) {
+      activeTabNumber = tabIndex;
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+      const target = document.getElementById(`tab-content-${tabIndex}`);
+      if (target) target.classList.remove('hidden');
+
+      document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
+        if (idx + 1 === tabIndex) {
+          btn.className = "tab-btn px-3 py-1.5 rounded-xl font-bold bg-emerald-700 text-white shadow transition whitespace-nowrap";
+        } else {
+          btn.className = "tab-btn px-3 py-1.5 rounded-xl font-medium text-emerald-200 hover:text-white transition whitespace-nowrap";
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function startDictation(elementId) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        alert('Speech recognition is not supported in this browser.');
+        return;
+      }
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-NZ';
+      recognition.interimResults = false;
+      const targetField = document.getElementById(elementId);
+      targetField.style.backgroundColor = '#ecfdf5';
+
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        targetField.value = targetField.value ? targetField.value + ' ' + transcript : transcript;
+        autoExpand(targetField);
+        triggerAutoSave();
+      };
+      recognition.onspeechend = () => { recognition.stop(); targetField.style.backgroundColor = ''; };
+      recognition.onerror = () => { targetField.style.backgroundColor = ''; };
+      recognition.start();
+    }
+
+    const STORAGE_KEY = 'kai_oranga_journal_draft_v19';
+    let autoSaveTimer = null;
+
+    function triggerAutoSave() {
+      clearTimeout(autoSaveTimer);
+      autoSaveTimer = setTimeout(saveDraftToLocal, 400);
+    }
+
+    function saveDraftToLocal() {
+      const draft = {
+        studentName: document.getElementById('studentName')?.value || '',
+        maaraLocation: document.getElementById('maaraLocation')?.value || '',
+        helpers: document.getElementById('helpers')?.value || '',
+        mahiDate: document.getElementById('mahiDate')?.value || '',
+        maramatakaPlan: document.getElementById('maramatakaPlan')?.value || '',
+        karakiaTitle: document.getElementById('karakiaTitle')?.value || '',
+        karakiaScenario: document.getElementById('karakiaScenario')?.value || '',
+        karakiaActual: document.getElementById('karakiaActual')?.value || '',
+        karakiaLiteral: document.getElementById('karakiaLiteral')?.value || '',
+        karakiaMetaphoric: document.getElementById('karakiaMetaphoric')?.value || '',
+        karakiaInterpretation: document.getElementById('karakiaInterpretation')?.value || '',
+        whakataukiText: document.getElementById('whakataukiText')?.value || '',
+        whakataukiScenario: document.getElementById('whakataukiScenario')?.value || '',
+        whakataukiLiteral: document.getElementById('whakataukiLiteral')?.value || '',
+        whakataukiMetaphoric: document.getElementById('whakataukiMetaphoric')?.value || '',
+        whakataukiInterpretation: document.getElementById('whakataukiInterpretation')?.value || '',
+        tureTangata: document.getElementById('tureTangata')?.value || '',
+        tureTikanga: document.getElementById('tureTikanga')?.value || '',
+        harvestCrops: document.getElementById('harvestCrops')?.value || '',
+        harvestYield: document.getElementById('harvestYield')?.value || '',
+        harvestGivenTo: document.getElementById('harvestGivenTo')?.value || '',
+        harvestGivenAmount: document.getElementById('harvestGivenAmount')?.value || '',
+        harvestGivenNotes: document.getElementById('harvestGivenNotes')?.value || '',
+        harvestNotes: document.getElementById('harvestNotes')?.value || '',
+        kaiDishName: document.getElementById('kaiDishName')?.value || '',
+        kaiCategory: document.getElementById('kaiCategory')?.value || '',
+        kaiPreparationNotes: document.getElementById('kaiPreparationNotes')?.value || '',
+        roleKaitiaki: document.getElementById('roleKaitiaki')?.value || '',
+        otherNotes: document.getElementById('otherNotes')?.value || '',
+        finalThoughts: document.getElementById('finalThoughts')?.value || '',
+        futureActions: document.getElementById('futureActions')?.value || '',
+        tasks: {
+          before: getTasksForStage('before'),
+          during: getTasksForStage('during'),
+          after: getTasksForStage('after'),
+          harvest: getTasksForStage('harvest'),
+          kaiCreated: getTasksForStage('kaiCreated')
+        }
+      };
+
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(draft));
+        const badge = document.getElementById('saveBadge');
+        if (badge) {
+          badge.classList.remove('hidden');
+          setTimeout(() => badge.classList.add('hidden'), 1800);
+        }
+      } catch (e) {}
+    }
+
+    function getTasksForStage(stage) {
+      const list = [];
+      for (const id in subStageData[stage]) {
+        list.push({
+          id,
+          title: document.getElementById(`title-${id}`)?.value || '',
+          notes: document.getElementById(`notes-${id}`)?.value || '',
+          photos: subStageData[stage][id].photos
+        });
+      }
+      return list;
+    }
+
+    function restoreDraftFromLocal() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return false;
+      try {
+        const draft = JSON.parse(raw);
+        for (const key in draft) {
+          if (key === 'tasks') continue;
+          const el = document.getElementById(key);
+          if (el && draft[key]) {
+            el.value = draft[key];
+            autoExpand(el);
+          }
+        }
+        return true;
+      } catch (e) { return false; }
+    }
+
+    // Precise synodic calculation engine for Maramataka
+    const MARAMATAKA_PHASES = [
+      { name: "Whiro", po: 1, energy: "Low / Resting", maara: "Rest the whenua; tool repair; weeding deep roots." },
+      { name: "Tireo", po: 2, energy: "Low / Emerging", maara: "Bed preparation; setting borders; clearing debris." },
+      { name: "Ohoata", po: 3, energy: "Building slowly", maara: "Preparing compost piles and organic amendments." },
+      { name: "Oue", po: 4, energy: "Moderate", maara: "Favourable for planting tubers and establishing root crops." },
+      { name: "Okoro", po: 5, energy: "Moderate", maara: "Transplanting seedlings and weeding boundaries." },
+      { name: "Tamatea Tutahi", po: 6, energy: "Unpredictable / Windy", maara: "Wind barriers and bed reinforcement." },
+      { name: "Tamatea Whakapau", po: 7, energy: "Unpredictable", maara: "Maintenance mahi; heavy mulching and aerating pathways." },
+      { name: "Huna", po: 8, energy: "Concealed", maara: "Avoid above-ground planting. Exterminate pests and pull weeds." },
+      { name: "Ari", po: 9, energy: "Fertile / Productive", maara: "Excellent for root crops; kūmara, taewa, carrots." },
+      { name: "Mawake", po: 10, energy: "Productive", maara: "Transplanting hearty seedlings and legumes." },
+      { name: "Oturu", po: 11, energy: "High vitality", maara: "Sowing, planting leafy greens, taking cuttings." },
+      { name: "Rakaunui", po: 12, energy: "Full Moon Peak", maara: "Peak vitality. Sowing, planting leafy kai, harvesting seed." },
+      { name: "Rakau-matohi", po: 13, energy: "High / Dispersing", maara: "Harvesting fruit and leafy greens; above-ground crops." },
+      { name: "Takirau", po: 14, energy: "Descending", maara: "General maintenance, mulching, compost turning." },
+      { name: "Oike", po: 15, energy: "Low", maara: "Rest the maara. Organizing seed trays and storehouses." },
+      { name: "Korekore Te Whiawhia", po: 16, energy: "Unproductive", maara: "Not suitable for sowing. Weed eradication only." },
+      { name: "Korekore Te Rawea", po: 17, energy: "Unproductive", maara: "Soil resting. Prepare liquid seaweed teas." },
+      { name: "Tangaroa a Mua", po: 18, energy: "Very high / Fruitful", maara: "Prime day for all maara activities: planting, harvesting, seed saving." },
+      { name: "Tangaroa a Roto", po: 19, energy: "Extremely fertile", maara: "Exceptional for moisture-loving plants and root crops." },
+      { name: "Tangaroa Kiokio", po: 20, energy: "Fruitful", maara: "Planting and transplanting continue with high establishment." },
+      { name: "Otane", po: 21, energy: "Vital / Forest vitality", maara: "Superb for planting native trees, shrubs, and cuttings." },
+      { name: "Orongonui", po: 22, energy: "Peak abundance", maara: "One of the absolute best planting and sowing days." },
+      { name: "Mauri", po: 23, energy: "Fading slowly", maara: "Morning harvesting of greens; planting root kai." },
+      { name: "Omutu", po: 24, energy: "Resting", maara: "Maara maintenance and ground clearing only." },
+      { name: "Mutuwhenua", po: 25, energy: "Complete darkness / Rest", maara: "Maara rest day. No seed sowing; observe and record notes." },
+      { name: "Mutuwhenua", po: 26, energy: "Complete darkness / Rest", maara: "Maara rest day. No seed sowing; observe and record notes." },
+      { name: "Mutuwhenua", po: 27, energy: "Complete darkness / Rest", maara: "Maara rest day. No seed sowing; observe and record notes." },
+      { name: "Mutuwhenua", po: 28, energy: "Complete darkness / Rest", maara: "Maara rest day. No seed sowing; observe and record notes." },
+      { name: "Mutuwhenua", po: 29, energy: "Complete darkness / Rest", maara: "Maara rest day. No seed sowing; observe and record notes." },
+      { name: "Mutuwhenua", po: 30, energy: "Complete darkness / Rest", maara: "Maara rest day. No seed sowing; observe and record notes." }
+    ];
+
+    function onDateChanged(dateString) {
+      updateMaramataka(dateString);
+      triggerAutoSave();
+    }
+
+    function updateMaramataka(dateString) {
+      if (!dateString) return;
+      const targetDate = new Date(dateString + 'T12:00:00Z');
+      const epochNewMoon = new Date('2024-01-11T11:57:00Z').getTime();
+      const synodicCycleMs = 29.53058867 * 86400000;
+      
+      const diff = targetDate.getTime() - epochNewMoon;
+      const phaseRatio = ((diff % synodicCycleMs) + synodicCycleMs) % synodicCycleMs / synodicCycleMs;
+      const index = Math.floor(phaseRatio * MARAMATAKA_PHASES.length);
+      currentPhaseData = MARAMATAKA_PHASES[index] || MARAMATAKA_PHASES[0];
+
+      document.getElementById('lunarPhaseName').textContent = `🌙 Phase: ${currentPhaseData.name} (Pō ${currentPhaseData.po})`;
+      document.getElementById('lunarEnergy').textContent = currentPhaseData.energy;
+      document.getElementById('lunarActivity').textContent = currentPhaseData.maara;
+      
+      const planArea = document.getElementById('maramatakaPlan');
+      if (planArea && (!planArea.value || planArea.dataset.autofilled === "true")) {
+        planArea.value = `Taking advantage of ${currentPhaseData.name} (Pō ${currentPhaseData.po} - ${currentPhaseData.energy}): ${currentPhaseData.maara}`;
+        planArea.dataset.autofilled = "true";
+        autoExpand(planArea);
+      }
+    }
+
+    const KARAKIA_PRESETS = [
+      { id: "k1", scenario: "Sowing Seeds / Welcoming Kai", title: "Nau Mai e Ngā Hua", actual: "Nau mai e ngā hua o te ao,\nHe kai mā te tinana, he kai mā te wairua.\nKa mihi ki a Papatūānuku, ka mihi ki a Rongo.", literal: "Welcome fruits of the world, sustenance for body and spirit. Acknowledgements to Papatūānuku and Rongo.", metaphoric: "Recognizing food as living wairua binding our cells to the soil.", interpretation: "Gratitude for soil transforming sun and compost into living medicine." },
+      { id: "k2", scenario: "Forest & Trees (Tāne)", title: "Karakia Whakatō Rākau", actual: "Tāne i te mauri, Tāne i te wananga, homai te tipu tupu ki te whenua.", literal: "Tāne of life force and wisdom, grant growth to the land.", metaphoric: "Invoking the forest deity for canopy and root resilience.", interpretation: "Connecting tree planting and protection to Tāne." },
+      { id: "k3", scenario: "Water & Moisture (Tangaroa)", title: "Karakia Whakarite Wai", actual: "Rere mai e ngā wai o Tangaroa, ngā puna o ngā rangi, whakamākūkūtia tēnei whenua.", literal: "Flow waters of Tangaroa, springs of heaven, moisten this land.", metaphoric: "Consciously acknowledging sacred water as life-giver.", interpretation: "Honoring the hydrological cycle linking rain to roots." },
+      { id: "k4", scenario: "Cultivated Crops (Rongo-mā-Tāne)", title: "Karakia Whakatō Kūmara", actual: "Rongo-mā-Tāne whakatōkia te tipu, kia tupu he hua nui, he hua momona.", literal: "Rongo plant the shoots so large, fat fruit grow in the earth.", metaphoric: "Invoking Rongo for peace and cultivated abundance.", interpretation: "Aligning planter intent with peaceful nourishment." },
+      { id: "k5", scenario: "Morning Opening / Timatanga", title: "Karakia Tīmatanga Mahi", actual: "Tukua te wairua kia rere ki ngā ao tūroa, whakatōkia te rangimārie.", literal: "Let spirit soar to eternal worlds, plant peace in the land.", metaphoric: "Centering minds and harmonizing human energy.", interpretation: "Clearing outside stresses before stepping into the living soil." },
+      { id: "k6", scenario: "Wind & Weather (Tāwhirimātea)", title: "Karakia Tāwhirimātea", actual: "Tāwhirimātea e, tiakina ngā tupu i ngā hau kaha, whakatūria te wharepuni.", literal: "Tāwhirimātea, protect shoots from strong gales.", metaphoric: "Balancing atmospheric forces and wind pressure.", interpretation: "Sheltering delicate plants during seasonal gales." },
+      { id: "k7", scenario: "Soil Preparation / Huke Whenua", title: "Karakia Huke Whenua", actual: "Whakapapa te toki ki te whenua, hukea ngā taupare, whakatōria te mauri hou.", literal: "Lay blade to ground, lift obstructions, plant new life force.", metaphoric: "Asking permission to pierce and cultivate Papa's skin.", interpretation: "Honoring the living soil microbiome during bed prep." },
+      { id: "k8", scenario: "Weeding / Whakawātea", title: "Karakia Whakawātea Otaota", actual: "Wātea mai te ara, wātea mai te whenua, whakawāteatia ngā otaota whakamate.", literal: "Clear path, clear ground, remove harmful weeds.", metaphoric: "Removing competition mirroring mental focus.", interpretation: "Restoring energetic clarity to the crops." },
+      { id: "k9", scenario: "Harvesting / Hauhake", title: "Karakia Hauhake", actual: "Whakawhetai ki ngā hua o te maara, i whāngaia mai e Papatūānuku.", literal: "Give thanks to garden fruit fed by Earth Mother and Rongo.", metaphoric: "Gratitude for the elements providing sustenance.", interpretation: "Acknowledging harvest as a shared gift, not human triumph." },
+      { id: "k10", scenario: "Closing / Whakamutunga", title: "Karakia Whakamutunga Mahi", actual: "Unuhia, unuhia ki te uru tapu nui, kia wātea ai te whenua, kia wātea ai te tangata.", literal: "Withdraw to sacred sanctuary, land and human be clear.", metaphoric: "Closing the spiritual container safely.", interpretation: "Transitioning back from tapu mahi to everyday life." }
+    ];
+
+    const WHATAUKI_PRESETS = [
+      { id: "w1", scenario: "Self-Reliance", text: "He kai kei aku ringa.", literal: "Food at my hands.", metaphoric: "Self-determination, resilience, and personal capability.", interpretation: "Connecting hands to living soil brings true sovereignty." },
+      { id: "w2", scenario: "Land Stewardship", text: "Toitu te whenua, whatungarongaro he tangata.", literal: "The land remains, people disappear.", metaphoric: "Humans are temporary custodians of living soils.", interpretation: "Nurturing soil biology so it outlasts us." },
+      { id: "w3", scenario: "Humility", text: "Kāore te kūmara e kōrero mō tōna reka.", literal: "The kūmara doesn't speak of its own sweetness.", metaphoric: "True excellence is shown through produce.", interpretation: "Letting healthy crops reflect our care." },
+      { id: "w4", scenario: "Cooperation", text: "Mā pango, mā whero, ka oti ai te mahi.", literal: "By black and red, work is completed.", metaphoric: "Collaborative effort across all roles.", interpretation: "Whānau teamwork accomplishes massive tasks." },
+      { id: "w5", scenario: "Perseverance", text: "Tama tū, tama ora; tama noho, tama mate.", literal: "He who stands lives; he who sits dies.", metaphoric: "Proactive engagement in outdoor labor.", interpretation: "Daily physical mahi generates vitality." },
+      { id: "w6", scenario: "Legacy", text: "Iti noa ana, he pito mata.", literal: "Though small, a viable seed/tuber.", metaphoric: "Generational potential in small beginnings.", interpretation: "An unbroken seed holds abundance." },
+      { id: "w7", scenario: "Action", text: "He peke tangata e kore e kī, he peke kai ka kī.", literal: "Genealogy sacks don't fill stomachs, food sacks do.", metaphoric: "Practical kai production is essential.", interpretation: "Action over theory." },
+      { id: "w8", scenario: "Timing", text: "He wā tō te pua, he wā tō te hua.", literal: "A season for blossom, a season for fruit.", metaphoric: "Natural cycles cannot be rushed.", interpretation: "Alignment with lunar rhythms." },
+      { id: "w9", scenario: "Shelter", text: "He kōrari tū ki te hau ka whati, he rōpū harakeke e kore e whati.", literal: "Single stalk breaks, flax clump survives.", metaphoric: "Dense companion planting against gales.", interpretation: "Windbreaks protect vulnerable crops." },
+      { id: "w10", scenario: "Abundance", text: "Kua mātotoru te tupu, kua ki te pātaka.", literal: "Dense growth, full storehouse.", metaphoric: "Security and winter warmth for all.", interpretation: "Good husbandry culminates in bounty." }
+    ];
+
+    let subStageCounters = { before: 0, during: 0, after: 0, harvest: 0, kaiCreated: 0 };
+    const subStageData = { before: {}, during: {}, after: {}, harvest: {}, kaiCreated: {} };
+
+    function autoExpand(field) {
+      if (!field) return;
+      field.style.height = 'inherit';
+      field.style.height = (field.scrollHeight + 2) + 'px';
+    }
+
+    function addSubStage(stage, defaultTitle = '') {
+      subStageCounters[stage]++;
+      const id = `${stage}_${subStageCounters[stage]}`;
+      subStageData[stage][id] = { photos: [] };
+
+      const container = document.getElementById(`container-${stage}`);
+      const groupDiv = document.createElement('div');
+      groupDiv.id = `group-${id}`;
+      groupDiv.className = "bg-stone-50 p-4 rounded-xl border border-stone-300 shadow-sm space-y-3 relative";
+
+      groupDiv.innerHTML = `
+        <div class="flex items-center justify-between gap-2 border-b border-stone-200 pb-2">
+          <input type="text" id="title-${id}" placeholder="Task Group Title" value="${defaultTitle}" class="font-serif font-bold text-stone-900 text-sm border-b border-transparent focus:border-emerald-700 outline-none w-full bg-transparent" oninput="triggerAutoSave()" />
+          <button type="button" onclick="removeSubStage('${stage}', '${id}')" class="no-print text-xs text-rose-700 bg-rose-50 px-2 py-1 rounded cursor-pointer">✕ Remove</button>
+        </div>
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-stone-600">Photos (<span id="count-${id}">0 photos</span>)</label>
+          </div>
+          <div id="gallery-${id}" class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-2 min-h-[70px] border border-dashed border-stone-300 rounded-lg p-2 bg-white">
+            <div class="col-span-full flex items-center justify-center text-[11px] text-stone-400 italic py-2">Snap or upload photos</div>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 no-print">
+            <label class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-semibold cursor-pointer transition shadow-sm">
+              <span>📸</span><span>Snap Photo</span>
+              <input type="file" accept="image/*" capture="environment" class="hidden" onchange="handleSubStagePhotoUpload(event, '${stage}', '${id}')" />
+            </label>
+            <label class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-stone-700 hover:bg-stone-800 text-white rounded-lg text-xs font-semibold cursor-pointer transition shadow-sm">
+              <span>🖼️</span><span>Upload / Gallery</span>
+              <input type="file" accept="image/*" multiple class="hidden" onchange="handleSubStagePhotoUpload(event, '${stage}', '${id}')" />
+            </label>
+          </div>
+        </div>
+
+        <!-- Optional stage karakia toggle -->
+        <div class="pt-2 border-t border-stone-200">
+          <label class="flex items-center gap-2 text-xs font-semibold text-emerald-900 cursor-pointer">
+            <input type="checkbox" id="useKarakia-${id}" onchange="toggleTaskKarakia('${id}')" class="rounded text-emerald-700 focus:ring-emerald-700 w-4 h-4" />
+            <span>Include specific Karakia or Phrase for this task card</span>
+          </label>
+          <div id="karakiaBox-${id}" class="hidden mt-2 p-3 bg-white rounded-xl border border-stone-200 space-y-2">
+            <select id="kPreset-${id}" class="w-full text-xs p-1.5 border rounded-lg bg-stone-50 mb-1" onchange="applyTaskKarakiaPreset('${id}', this.value)">
+              <option value="">-- Choose from 10 Karakia Presets --</option>
+            </select>
+            <input type="text" id="kTitle-${id}" placeholder="Karakia Title" class="w-full text-xs p-2 border rounded-lg font-semibold" oninput="triggerAutoSave()" />
+            <textarea rows="2" id="kActual-${id}" placeholder="Te Reo Māori text..." class="w-full text-xs p-2 border rounded-lg font-serif italic" oninput="triggerAutoSave()"></textarea>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+              <textarea rows="2" id="kLit-${id}" placeholder="Literal..." class="w-full text-[11px] p-1.5 border rounded-lg" oninput="triggerAutoSave()"></textarea>
+              <textarea rows="2" id="kMet-${id}" placeholder="Metaphoric..." class="w-full text-[11px] p-1.5 border rounded-lg" oninput="triggerAutoSave()"></textarea>
+              <textarea rows="2" id="kInt-${id}" placeholder="Interpretation..." class="w-full text-[11px] p-1.5 border rounded-lg" oninput="triggerAutoSave()"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-stone-600">Observations & Step Reflection</label>
+            <button type="button" onclick="startDictation('notes-${id}')" class="text-xs text-emerald-800 font-semibold no-print">🎙️ Dictate</button>
+          </div>
+          <textarea rows="3" id="notes-${id}" oninput="autoExpand(this); triggerAutoSave();" placeholder="Describe observations..." class="w-full p-3 border rounded-lg text-xs bg-white outline-none font-serif leading-relaxed"></textarea>
+        </div>
+      `;
+
+      const sel = groupDiv.querySelector(`#kPreset-${id}`);
+      if (sel) {
+        KARAKIA_PRESETS.forEach(item => {
+          const opt = document.createElement('option');
+          opt.value = item.id;
+          opt.textContent = `${item.title} (${item.scenario})`;
+          sel.appendChild(opt);
+        });
+      }
+
+      container.appendChild(groupDiv);
+      triggerAutoSave();
+    }
+
+    function toggleTaskKarakia(id) {
+      const box = document.getElementById(`karakiaBox-${id}`);
+      const chk = document.getElementById(`useKarakia-${id}`);
+      if (chk && box) {
+        if (chk.checked) {
+          box.classList.remove('hidden');
+        } else {
+          box.classList.add('hidden');
+        }
+      }
+      triggerAutoSave();
+    }
+
+    function applyTaskKarakiaPreset(id, presetId) {
+      if (!presetId) return;
+      const item = KARAKIA_PRESETS.find(k => k.id === presetId);
+      if (item) {
+        document.getElementById(`kTitle-${id}`).value = item.title;
+        document.getElementById(`kActual-${id}`).value = item.actual;
+        document.getElementById(`kLit-${id}`).value = item.literal;
+        document.getElementById(`kMet-${id}`).value = item.metaphoric;
+        document.getElementById(`kInt-${id}`).value = item.interpretation || '';
+        triggerAutoSave();
+      }
+    }
+
+    function removeSubStage(stage, id) {
+      delete subStageData[stage][id];
+      const el = document.getElementById(`group-${id}`);
+      if (el) el.remove();
+      triggerAutoSave();
+    }
+
+    function handleSubStagePhotoUpload(event, stage, id) {
+      const files = Array.from(event.target.files);
+      if (!files.length) return;
+      files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          subStageData[stage][id].photos.push(e.target.result);
+          renderSubStageGallery(stage, id);
+        };
+        reader.readAsDataURL(file);
+      });
+      event.target.value = '';
+    }
+
+    function removeSubStagePhoto(stage, id, index) {
+      subStageData[stage][id].photos.splice(index, 1);
+      renderSubStageGallery(stage, id);
+    }
+
+    function renderSubStageGallery(stage, id) {
+      const gallery = document.getElementById(`gallery-${id}`);
+      const counter = document.getElementById(`count-${id}`);
+      const photos = subStageData[stage][id].photos;
+      if (!gallery || !counter) return;
+      gallery.innerHTML = '';
+      counter.textContent = `${photos.length} photo${photos.length === 1 ? '' : 's'}`;
+      if (photos.length === 0) {
+        gallery.innerHTML = `<div class="col-span-full flex items-center justify-center text-[11px] text-stone-400 italic py-2">Snap or upload photos</div>`;
+        return;
+      }
+      photos.forEach((src, idx) => {
+        const wrap = document.createElement('div');
+        wrap.className = 'relative group aspect-square rounded-lg overflow-hidden border border-stone-300 bg-stone-200';
+        wrap.innerHTML = `<img src="${src}" class="w-full h-full object-cover" /><button type="button" onclick="removeSubStagePhoto('${stage}', '${id}', ${idx})" class="no-print absolute top-1 right-1 bg-rose-800 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold cursor-pointer">✕</button>`;
+        gallery.appendChild(wrap);
+      });
+    }
+
+    function populateReportPreview() {
+      const sName = document.getElementById('studentName')?.value.trim();
+      const sLoc = document.getElementById('maaraLocation')?.value.trim();
+      const sDate = document.getElementById('mahiDate')?.value;
+      const sHelpers = document.getElementById('helpers')?.value.trim();
+
+      document.getElementById('rep_studentName').textContent = sName || 'Not specified';
+      document.getElementById('rep_maaraLocation').textContent = sLoc || 'Not specified';
+      document.getElementById('rep_mahiDate').textContent = sDate || 'Not specified';
+      document.getElementById('rep_helpers').textContent = sHelpers || 'None';
+
+      const plan = document.getElementById('maramatakaPlan')?.value.trim();
+      document.getElementById('rep_lunarHeader').textContent = `🌙 Maramataka Phase: ${currentPhaseData.name} (Pō ${currentPhaseData.po}) — ${currentPhaseData.energy}`;
+      
+      const marSec = document.getElementById('rep_sec_maramataka');
+      if (plan) {
+        marSec.style.display = 'block';
+        document.getElementById('rep_maramatakaPlan').textContent = plan;
+      } else {
+        marSec.style.display = 'none';
+      }
+
+      const kTitle = document.getElementById('karakiaTitle')?.value.trim();
+      const kActual = document.getElementById('karakiaActual')?.value.trim();
+      const kLit = document.getElementById('karakiaLiteral')?.value.trim();
+      const kMet = document.getElementById('karakiaMetaphoric')?.value.trim();
+      const kInt = document.getElementById('karakiaInterpretation')?.value.trim();
+
+      const karSec = document.getElementById('rep_sec_karakia');
+      if (kTitle || kActual || kLit || kMet || kInt) {
+        karSec.style.display = 'block';
+        document.getElementById('rep_karakiaTitle').textContent = kTitle || 'Karakia';
+        document.getElementById('rep_karakiaActual').textContent = kActual || '';
+        document.getElementById('rep_karakiaLiteral').textContent = kLit || 'N/A';
+        document.getElementById('rep_karakiaMetaphoric').textContent = kMet || 'N/A';
+        document.getElementById('rep_karakiaInterpretation').textContent = kInt || 'N/A';
+      } else {
+        karSec.style.display = 'none';
+      }
+
+      const wText = document.getElementById('whakataukiText')?.value.trim();
+      const tTangata = document.getElementById('tureTangata')?.value.trim();
+      const tTikanga = document.getElementById('tureTikanga')?.value.trim();
+
+      const whaSec = document.getElementById('rep_sec_whakatauki');
+      if (wText || tTangata || tTikanga) {
+        whaSec.style.display = 'block';
+        document.getElementById('rep_whakataukiText').textContent = wText ? `Whakataukī: "${wText}"` : '';
+        document.getElementById('rep_tureTangata').textContent = tTangata || 'N/A';
+        document.getElementById('rep_tureTikanga').textContent = tTikanga || 'N/A';
+      } else {
+        whaSec.style.display = 'none';
+      }
+
+      const rKaitiaki = document.getElementById('roleKaitiaki')?.value.trim();
+      const fThoughts = document.getElementById('finalThoughts')?.value.trim();
+      const fActions = document.getElementById('futureActions')?.value.trim();
+
+      document.getElementById('rep_group_roleKaitiaki').style.display = rKaitiaki ? 'block' : 'none';
+      document.getElementById('rep_roleKaitiaki').textContent = rKaitiaki;
+
+      document.getElementById('rep_group_finalThoughts').style.display = fThoughts ? 'block' : 'none';
+      document.getElementById('rep_finalThoughts').textContent = fThoughts;
+
+      document.getElementById('rep_group_futureActions').style.display = fActions ? 'block' : 'none';
+      document.getElementById('rep_futureActions').textContent = fActions;
+
+      const container = document.getElementById('rep_evidenceContent');
+      container.innerHTML = '';
+
+      const stageLabels = { 
+        before: '1. I Mua (Before Mahi)', 
+        during: '2. I te Mahi (During Mahi)', 
+        after: '3. Whakaoti (After Mahi)', 
+        harvest: '4. Huawhenua (Harvest & Koha)', 
+        kaiCreated: '5. Te Kai I Hangaia (Prepared Kai)' 
+      };
+
+      ['before', 'during', 'after', 'harvest', 'kaiCreated'].forEach(stg => {
+        const groups = subStageData[stg];
+        let hasContent = false;
+        let stageDiv = document.createElement('div');
+        stageDiv.className = "space-y-4 pt-2";
+        stageDiv.innerHTML = `<h4 class="font-serif font-bold text-emerald-900 text-md border-b border-stone-200 pb-1">${stageLabels[stg]}</h4>`;
+
+        for (const id in groups) {
+          const title = document.getElementById(`title-${id}`)?.value.trim() || '';
+          const notes = document.getElementById(`notes-${id}`)?.value.trim() || '';
+          const photos = groups[id].photos;
+
+          const useK = document.getElementById(`useKarakia-${id}`)?.checked || false;
+          let kCardTitle = '', kCardActual = '', kCardLit = '', kCardMet = '', kCardInt = '';
+          if (useK) {
+            kCardTitle = document.getElementById(`kTitle-${id}`)?.value.trim() || '';
+            kCardActual = document.getElementById(`kActual-${id}`)?.value.trim() || '';
+            kCardLit = document.getElementById(`kLit-${id}`)?.value.trim() || '';
+            kCardMet = document.getElementById(`kMet-${id}`)?.value.trim() || '';
+            kCardInt = document.getElementById(`kInt-${id}`)?.value.trim() || '';
+          }
+
+          if (title || notes || photos.length > 0 || useK) {
+            hasContent = true;
+            let groupSubDiv = document.createElement('div');
+            groupSubDiv.className = "bg-stone-50/60 p-4 rounded-xl border border-stone-200 space-y-2";
+            
+            let karakiaHTML = '';
+            if (useK && (kCardTitle || kCardActual)) {
+              karakiaHTML = `
+                <div class="p-3 bg-emerald-50/70 rounded-lg border border-emerald-200 space-y-1 mb-2">
+                  <p class="text-xs font-bold text-emerald-900">🌿 Karakia: ${kCardTitle}</p>
+                  <p class="text-xs font-serif italic text-emerald-950">${kCardActual}</p>
+                  ${kCardLit ? `<p class="text-[11px] text-stone-700"><strong>Literal:</strong> ${kCardLit}</p>` : ''}
+                </div>
+              `;
+            }
+
+            groupSubDiv.innerHTML = `
+              ${title ? `<h5 class="font-bold text-stone-900 text-xs uppercase tracking-wider">${title}</h5>` : ''}
+              ${karakiaHTML}
+              ${notes ? `<p class="text-sm font-serif leading-relaxed">${notes}</p>` : ''}
+            `;
+
+            if (photos.length > 0) {
+              let photoGrid = document.createElement('div');
+              photoGrid.className = "grid grid-cols-2 gap-3 mt-3";
+              photos.forEach(src => {
+                photoGrid.innerHTML += `<img src="${src}" class="report-photo" />`;
+              });
+              groupSubDiv.appendChild(photoGrid);
+            }
+            stageDiv.appendChild(groupSubDiv);
+          }
+        }
+
+        if (hasContent) {
+          container.appendChild(stageDiv);
+        }
+      });
+    }
+
+    let resourceCount = 0;
+    function addResourceItem(title = '', url = '', notes = '') {
+      resourceCount++;
+      const id = `res_${resourceCount}`;
+      const container = document.getElementById('resourceContainer');
+      const div = document.createElement('div');
+      div.id = id;
+      div.className = "p-3 bg-stone-50 border border-stone-200 rounded-xl space-y-2 relative";
+      div.innerHTML = `
+        <div class="flex items-center justify-between gap-2">
+          <input type="text" placeholder="Resource Title / Book" value="${title}" class="w-full text-xs font-bold border rounded-lg p-2 bg-white" oninput="triggerAutoSave()" />
+          <button type="button" onclick="document.getElementById('${id}').remove(); triggerAutoSave();" class="no-print text-xs text-rose-700 bg-rose-50 px-2 py-1 rounded cursor-pointer">✕</button>
+        </div>
+      `;
+      container.appendChild(div);
+      triggerAutoSave();
+    }
+
+    function initDropdowns() {
+      const kSelect = document.getElementById('karakiaSelect');
+      if (kSelect) {
+        KARAKIA_PRESETS.forEach((item) => {
+          const opt = document.createElement('option');
+          opt.value = item.id;
+          opt.textContent = `${item.title} (${item.scenario})`;
+          kSelect.appendChild(opt);
+        });
+      }
+      const wSelect = document.getElementById('whakataukiSelect');
+      if (wSelect) {
+        WHATAUKI_PRESETS.forEach((item) => {
+          const opt = document.createElement('option');
+          opt.value = item.id;
+          opt.textContent = `${item.text} - ${item.scenario}`;
+          wSelect.appendChild(opt);
+        });
+      }
+    }
+
+    function applyKarakiaPreset(id) {
+      if (!id) return;
+      const item = KARAKIA_PRESETS.find(k => k.id === id);
+      if (item) {
+        document.getElementById('karakiaTitle').value = item.title;
+        document.getElementById('karakiaScenario').value = item.scenario;
+        document.getElementById('karakiaActual').value = item.actual;
+        document.getElementById('karakiaLiteral').value = item.literal;
+        document.getElementById('karakiaMetaphoric').value = item.metaphoric;
+        document.getElementById('karakiaInterpretation').value = item.interpretation || '';
+        triggerAutoSave();
+      }
+    }
+
+    function applyWhakataukiPreset(id) {
+      if (!id) return;
+      const item = WHATAUKI_PRESETS.find(w => w.id === id);
+      if (item) {
+        document.getElementById('whakataukiText').value = item.text;
+        document.getElementById('whakataukiScenario').value = item.scenario;
+        document.getElementById('whakataukiLiteral').value = item.literal;
+        document.getElementById('whakataukiMetaphoric').value = item.metaphoric;
+        document.getElementById('whakataukiInterpretation').value = item.interpretation || '';
+        triggerAutoSave();
+      }
+    }
+
+    function handleDownloadPDF(e) {
+      e.preventDefault();
+      populateReportPreview();
+      window.print();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initDropdowns();
+      const restored = restoreDraftFromLocal();
+      if (!restored) {
+        applyKarakiaPreset('k1');
+        applyWhakataukiPreset('w1');
+        addSubStage('before', 'Beginning Maara - Sowing Seeds');
+        addSubStage('during', 'Bed Aeration & Liquid Biological Feeding');
+        addSubStage('after', 'Mulching & Tool Cleaning');
+        addSubStage('harvest', 'Harvest - Kai Hauhake');
+        addSubStage('kaiCreated', 'Kai Created - Whānau Meal');
+        addResourceItem('Kai Oranga Maara Handbook', 'https://wananga.ac.nz', 'Soil biology reference');
+        
+        const today = new Date().toISOString().split('T')[0];
+        const dateInput = document.getElementById('mahiDate');
+        if (dateInput) {
+          dateInput.value = today;
+          updateMaramataka(today);
+        }
+      } else {
+        addSubStage('before', 'Beginning Maara - Sowing Seeds');
+        addSubStage('during', 'Bed Aeration & Liquid Biological Feeding');
+        addSubStage('after', 'Mulching & Tool Cleaning');
+        addSubStage('harvest', 'Harvest - Kai Hauhake');
+        addSubStage('kaiCreated', 'Kai Created - Whānau Meal');
+        
+        const dateInput = document.getElementById('mahiDate');
+        if (dateInput && dateInput.value) {
+          updateMaramataka(dateInput.value);
+        } else {
+          const today = new Date().toISOString().split('T')[0];
+          if (dateInput) dateInput.value = today;
+          updateMaramataka(today);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
